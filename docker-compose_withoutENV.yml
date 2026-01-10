@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  flaskapp:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: testdb
+    depends_on: 
+      - mysql
+
+
+  mysql:
+    image: mysql:8.0.44-debian
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testdb
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysqldata:/var/lib/mysql:rw
+

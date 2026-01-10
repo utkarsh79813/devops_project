@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: statefulSet
+metadata:
+  name: mysql-config
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata: 
+      name: mysql-pod
+    spec:
+      containers:
+      - name: mysql-container
+        image: utkarshsrivastava9294/mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secrectkeyRef:
+              name: flask-app-secrect
+              key: MYSQL_ROOT_PASSWORD
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secrectkeyRef:
+              name: flask-app-secrect
+              key: MYSQL_DATABASE
+        volumeClaimTemplates:
