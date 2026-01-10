@@ -9,4 +9,3 @@ stringData:
   DB_NAME: testdb
   MYSQL_ROOT_PASSWORD: root
   MYSQL_DATABASE: testdb
-
